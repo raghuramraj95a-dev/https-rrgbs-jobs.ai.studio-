@@ -1,6 +1,6 @@
 {
-  "name": "RRGBS Home Services",
-  "description": "RRGBS provides Staffing, Recruitment, HR, Payroll, Manpower, Facility Management, BPO, RPO, Outsourcing and Business Consulting Services across India alongside reliable doorstep home services.",
+  "name": "RRGBS JOBS",
+  "description": "RRGBS - RR Group Of Business Solutions: Business Store (Housekeeping supplies, Uniforms, IT & Biometrics, Corporate gifts), Staffing, Recruitment, HR, Payroll, Manpower & Doorstep Home Services across India.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

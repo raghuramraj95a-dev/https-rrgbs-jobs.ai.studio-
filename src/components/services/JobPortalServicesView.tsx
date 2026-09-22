@@ -23,11 +23,12 @@ import {
   Home,
   CheckCircle2,
   Sparkles,
+  ShoppingBag,
 } from 'lucide-react';
 import { RecruitmentService } from '../../types';
 
 interface JobPortalServicesViewProps {
-  onSwitchPortal: (portal: 'home' | 'jobs' | 'services') => void;
+  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store') => void;
   onOpenContact: (prefillService?: RecruitmentService | null) => void;
 }
 
@@ -123,6 +124,14 @@ export const JobPortalServicesView: React.FC<JobPortalServicesViewProps> = ({
                 <Sparkles className="w-3 h-3" />
                 <span>Services</span>
               </button>
+              <button
+                onClick={() => onSwitchPortal('store')}
+                className="px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all cursor-pointer flex items-center gap-1"
+                title="RRGBS Online Business Store"
+              >
+                <ShoppingBag className="w-3 h-3" />
+                <span className="hidden sm:inline">Store</span>
+              </button>
             </div>
           </div>
         </div>
@@ -166,6 +175,13 @@ export const JobPortalServicesView: React.FC<JobPortalServicesViewProps> = ({
               className="hover:text-[#c40000] transition-colors cursor-pointer py-1"
             >
               Job Openings
+            </button>
+            <button
+              onClick={() => onSwitchPortal('store')}
+              className="hover:text-[#c40000] transition-colors cursor-pointer py-1 flex items-center gap-1 font-bold text-[#c40000]"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              Online Store
             </button>
             <button
               onClick={() => scrollToSection('services')}

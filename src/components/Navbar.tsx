@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Bookmark, PlusCircle, User, Phone, CheckCircle2 } from 'lucide-react';
+import { Menu, X, Bookmark, PlusCircle, User, Phone, CheckCircle2, ShoppingBag } from 'lucide-react';
 import { RRGBSLogo } from './common/RRGBSLogo';
 
 interface NavbarProps {
@@ -11,6 +11,7 @@ interface NavbarProps {
   user: { name: string; role: 'candidate' | 'employer' } | null;
   onLogout: () => void;
   onOpenCorporateServices?: () => void;
+  onOpenStore?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   user,
   onLogout,
   onOpenCorporateServices,
+  onOpenStore,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -88,6 +90,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Services
           </button>
+          {onOpenStore && (
+            <button
+              onClick={onOpenStore}
+              className="text-[#d71920] hover:text-[#a90000] transition-colors cursor-pointer flex items-center gap-1 font-bold"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              Store
+            </button>
+          )}
           <button
             onClick={() => scrollTo('employer')}
             className="hover:text-[#d71920] transition-colors cursor-pointer"
@@ -222,6 +233,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Recruitment &amp; Corporate Services
             </button>
+            {onOpenStore && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenStore();
+                }}
+                className="text-left py-1 text-[#d71920] font-bold flex items-center gap-1.5"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                RRGBS Business Store
+              </button>
+            )}
             <button
               onClick={() => scrollTo('employer')}
               className="text-left py-1 hover:text-[#d71920]"

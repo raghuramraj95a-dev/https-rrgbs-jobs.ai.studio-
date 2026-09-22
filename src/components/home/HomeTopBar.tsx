@@ -1,10 +1,10 @@
 import React from 'react';
-import { Phone, Mail, Sparkles, Briefcase, Home } from 'lucide-react';
+import { Phone, Mail, Sparkles, Briefcase, Home, ShoppingBag } from 'lucide-react';
 import { RRGBSLogo } from '../common/RRGBSLogo';
 
 interface HomeTopBarProps {
-  currentPortal: 'home' | 'jobs' | 'services';
-  onSwitchPortal: (portal: 'home' | 'jobs' | 'services') => void;
+  currentPortal: 'home' | 'jobs' | 'services' | 'store';
+  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store') => void;
 }
 
 export const HomeTopBar: React.FC<HomeTopBarProps> = ({
@@ -81,6 +81,18 @@ export const HomeTopBar: React.FC<HomeTopBarProps> = ({
             >
               <Sparkles className="w-3 h-3" />
               <span>Services</span>
+            </button>
+            <button
+              onClick={() => onSwitchPortal('store')}
+              className={`px-2 py-0.5 rounded transition-all cursor-pointer flex items-center gap-1 ${
+                currentPortal === 'store'
+                  ? 'bg-[#d71920] text-white'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+              title="RRGBS Business Store"
+            >
+              <ShoppingBag className="w-3 h-3" />
+              <span>Store</span>
             </button>
           </div>
         </div>

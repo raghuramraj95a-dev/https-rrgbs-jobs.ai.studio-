@@ -36,9 +36,12 @@ import { FloatingActionButtons } from './components/home/FloatingActionButtons';
 // Corporate Services Portal
 import { JobPortalServicesView } from './components/services/JobPortalServicesView';
 
+// Business Store Portal
+import { RRGBSStoreView } from './components/store/RRGBSStoreView';
+
 export default function App() {
-  // Current active portal: 'services' (Staffing, HR & Business Solutions), 'jobs', or 'home'
-  const [portal, setPortal] = useState<'home' | 'jobs' | 'services'>('services');
+  // Current active portal: 'store' (Online Business Store), 'services', 'jobs', or 'home'
+  const [portal, setPortal] = useState<'home' | 'jobs' | 'services' | 'store'>('store');
 
   // Home service prefill state for contact section
   const [prefilledService, setPrefilledService] = useState<string>('Home Cleaning & Housekeeping');
@@ -227,16 +230,43 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#111111]">
-      {/* Top Bar with Brand & Portal Switcher */}
-      <HomeTopBar
-        currentPortal={portal}
-        onSwitchPortal={(p) => {
-          setPortal(p);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
+      {/* Top Bar with Brand & Portal Switcher (for home & jobs portals) */}
+      {(portal === 'home' || portal === 'jobs') && (
+        <HomeTopBar
+          currentPortal={portal}
+          onSwitchPortal={(p) => {
+            setPortal(p);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
 
-      {portal === 'home' ? (
+      {portal === 'store' ? (
+        /* ==================== RRGBS ONLINE BUSINESS STORE ==================== */
+        <div className="flex-1 flex flex-col">
+          <RRGBSStoreView
+            onSwitchPortal={(p) => {
+              setPortal(p);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onShowToast={(msg, type) => addToast(msg, type)}
+          />
+        </div>
+      ) : portal === 'services' ? (
+        /* ==================== RRGBS CORPORATE & STAFFING SERVICES PORTAL ==================== */
+        <div className="flex-1 flex flex-col">
+          <JobPortalServicesView
+            onSwitchPortal={(p) => {
+              setPortal(p);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenContact={(serv) => {
+              setSelectedServiceForContact(serv || null);
+              setContactModalOpen(true);
+            }}
+          />
+        </div>
+      ) : portal === 'home' ? (
         /* ==================== RRGBS HOME SERVICES PORTAL ==================== */
         <div className="flex-1 flex flex-col">
           {/* Main Navigation */}
@@ -279,20 +309,6 @@ export default function App() {
           {/* Floating Action Buttons (Phone & WhatsApp) */}
           <FloatingActionButtons />
         </div>
-      ) : portal === 'services' ? (
-        /* ==================== RRGBS CORPORATE & STAFFING SERVICES PORTAL ==================== */
-        <div className="flex-1 flex flex-col">
-          <JobPortalServicesView
-            onSwitchPortal={(p) => {
-              setPortal(p);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            onOpenContact={(serv) => {
-              setSelectedServiceForContact(serv || null);
-              setContactModalOpen(true);
-            }}
-          />
-        </div>
       ) : (
         /* ==================== RRGBS JOBS & STAFFING PORTAL ==================== */
         <div className="flex-1 flex flex-col bg-[#f6f7f9]">
@@ -319,6 +335,10 @@ export default function App() {
             }}
             onOpenCorporateServices={() => {
               setPortal('services');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenStore={() => {
+              setPortal('store');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />

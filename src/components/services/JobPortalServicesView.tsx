@@ -24,11 +24,12 @@ import {
   CheckCircle2,
   Sparkles,
   ShoppingBag,
+  FileText,
 } from 'lucide-react';
 import { RecruitmentService } from '../../types';
 
 interface JobPortalServicesViewProps {
-  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store') => void;
+  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store' | 'resume') => void;
   onOpenContact: (prefillService?: RecruitmentService | null) => void;
 }
 
@@ -132,6 +133,14 @@ export const JobPortalServicesView: React.FC<JobPortalServicesViewProps> = ({
                 <ShoppingBag className="w-3 h-3" />
                 <span className="hidden sm:inline">Store</span>
               </button>
+              <button
+                onClick={() => onSwitchPortal('resume')}
+                className="px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all cursor-pointer flex items-center gap-1"
+                title="AI Resume Builder"
+              >
+                <FileText className="w-3 h-3" />
+                <span className="hidden sm:inline">Resume</span>
+              </button>
             </div>
           </div>
         </div>
@@ -182,6 +191,13 @@ export const JobPortalServicesView: React.FC<JobPortalServicesViewProps> = ({
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               Online Store
+            </button>
+            <button
+              onClick={() => onSwitchPortal('resume')}
+              className="hover:text-[#c40000] transition-colors cursor-pointer py-1 flex items-center gap-1 font-bold text-[#111111]"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#c40000]" />
+              AI Resume
             </button>
             <button
               onClick={() => scrollToSection('services')}

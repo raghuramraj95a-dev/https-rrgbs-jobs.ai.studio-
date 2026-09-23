@@ -27,10 +27,11 @@ import {
   MessageCircle,
   ShoppingBag,
   ExternalLink,
+  FileText,
 } from 'lucide-react';
 
 interface RRGBSStoreViewProps {
-  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store') => void;
+  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store' | 'resume') => void;
   onShowToast: (message: string, type: 'success' | 'info' | 'error') => void;
 }
 
@@ -290,6 +291,14 @@ export const RRGBSStoreView: React.FC<RRGBSStoreViewProps> = ({
               >
                 <ShoppingBag className="w-3 h-3" />
                 <span>Store</span>
+              </button>
+              <button
+                onClick={() => onSwitchPortal('resume')}
+                className="px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all cursor-pointer flex items-center gap-1"
+                title="AI Resume Builder"
+              >
+                <FileText className="w-3 h-3" />
+                <span className="hidden sm:inline">Resume</span>
               </button>
             </div>
           </div>

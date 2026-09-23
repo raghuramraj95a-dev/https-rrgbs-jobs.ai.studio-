@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, Bookmark, PlusCircle, User, Phone, CheckCircle2, ShoppingBag } from 'lucide-react';
+import { Menu, X, Bookmark, PlusCircle, User, Phone, CheckCircle2, ShoppingBag, FileText, Sparkles } from 'lucide-react';
 import { RRGBSLogo } from './common/RRGBSLogo';
 
 interface NavbarProps {
@@ -12,6 +12,7 @@ interface NavbarProps {
   onLogout: () => void;
   onOpenCorporateServices?: () => void;
   onOpenStore?: () => void;
+  onOpenResume?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -24,6 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLogout,
   onOpenCorporateServices,
   onOpenStore,
+  onOpenResume,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -97,6 +99,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               Store
+            </button>
+          )}
+          {onOpenResume && (
+            <button
+              onClick={onOpenResume}
+              className="text-gray-800 hover:text-[#d71920] transition-colors cursor-pointer flex items-center gap-1 font-bold bg-red-50 hover:bg-red-100 px-2.5 py-1 rounded-md text-xs border border-red-200"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#d71920]" />
+              AI Resume
             </button>
           )}
           <button
@@ -243,6 +254,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
                 RRGBS Business Store
+              </button>
+            )}
+            {onOpenResume && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenResume();
+                }}
+                className="text-left py-1 text-[#111111] font-bold flex items-center gap-1.5"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#d71920]" />
+                RRGBS AI Resume Builder
               </button>
             )}
             <button

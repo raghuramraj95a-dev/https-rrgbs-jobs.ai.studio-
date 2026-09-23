@@ -1,17 +1,19 @@
 import React, { useState, useRef } from 'react';
 import { Job, ApplicationSubmission } from '../types';
-import { X, Upload, CheckCircle2, FileText, ArrowRight, AlertCircle } from 'lucide-react';
+import { X, Upload, CheckCircle2, FileText, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 
 interface ApplyModalProps {
   job: Job | null;
   onClose: () => void;
   onSubmitApplication: (submission: ApplicationSubmission) => void;
+  onOpenResumeBuilder?: () => void;
 }
 
 export const ApplyModal: React.FC<ApplyModalProps> = ({
   job,
   onClose,
   onSubmitApplication,
+  onOpenResumeBuilder,
 }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -290,6 +292,22 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                   </div>
                 )}
               </div>
+
+              {onOpenResumeBuilder && (
+                <div className="mt-1.5 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      onOpenResumeBuilder();
+                    }}
+                    className="text-[11px] text-[#d71920] hover:text-[#a90000] hover:underline font-semibold inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <Sparkles className="w-3 h-3 text-[#d71920]" />
+                    <span>Need an ATS resume? Build with RRGBS AI Resume Builder</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Note / Pitch */}

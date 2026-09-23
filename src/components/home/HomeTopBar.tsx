@@ -1,10 +1,10 @@
 import React from 'react';
-import { Phone, Mail, Sparkles, Briefcase, Home, ShoppingBag } from 'lucide-react';
+import { Phone, Mail, Sparkles, Briefcase, Home, ShoppingBag, FileText } from 'lucide-react';
 import { RRGBSLogo } from '../common/RRGBSLogo';
 
 interface HomeTopBarProps {
-  currentPortal: 'home' | 'jobs' | 'services' | 'store';
-  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store') => void;
+  currentPortal: 'home' | 'jobs' | 'services' | 'store' | 'resume';
+  onSwitchPortal: (portal: 'home' | 'jobs' | 'services' | 'store' | 'resume') => void;
 }
 
 export const HomeTopBar: React.FC<HomeTopBarProps> = ({
@@ -93,6 +93,18 @@ export const HomeTopBar: React.FC<HomeTopBarProps> = ({
             >
               <ShoppingBag className="w-3 h-3" />
               <span>Store</span>
+            </button>
+            <button
+              onClick={() => onSwitchPortal('resume')}
+              className={`px-2 py-0.5 rounded transition-all cursor-pointer flex items-center gap-1 ${
+                currentPortal === 'resume'
+                  ? 'bg-[#d71920] text-white'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+              title="AI Resume Builder"
+            >
+              <FileText className="w-3 h-3" />
+              <span>Resume</span>
             </button>
           </div>
         </div>

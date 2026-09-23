@@ -39,9 +39,12 @@ import { JobPortalServicesView } from './components/services/JobPortalServicesVi
 // Business Store Portal
 import { RRGBSStoreView } from './components/store/RRGBSStoreView';
 
+// AI Resume Builder Portal
+import { AIResumeBuilderView } from './components/resume/AIResumeBuilderView';
+
 export default function App() {
-  // Current active portal: 'store' (Online Business Store), 'services', 'jobs', or 'home'
-  const [portal, setPortal] = useState<'home' | 'jobs' | 'services' | 'store'>('store');
+  // Current active portal: 'resume' (AI Resume Builder), 'store', 'services', 'jobs', or 'home'
+  const [portal, setPortal] = useState<'home' | 'jobs' | 'services' | 'store' | 'resume'>('resume');
 
   // Home service prefill state for contact section
   const [prefilledService, setPrefilledService] = useState<string>('Home Cleaning & Housekeeping');
@@ -241,7 +244,18 @@ export default function App() {
         />
       )}
 
-      {portal === 'store' ? (
+      {portal === 'resume' ? (
+        /* ==================== RRGBS AI RESUME BUILDER PORTAL ==================== */
+        <div className="flex-1 flex flex-col">
+          <AIResumeBuilderView
+            onSwitchPortal={(p) => {
+              setPortal(p);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onShowToast={(msg, type) => addToast(msg, type)}
+          />
+        </div>
+      ) : portal === 'store' ? (
         /* ==================== RRGBS ONLINE BUSINESS STORE ==================== */
         <div className="flex-1 flex flex-col">
           <RRGBSStoreView
@@ -339,6 +353,10 @@ export default function App() {
             }}
             onOpenStore={() => {
               setPortal('store');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenResume={() => {
+              setPortal('resume');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
@@ -447,6 +465,11 @@ export default function App() {
             job={selectedJobForApply}
             onClose={() => setSelectedJobForApply(null)}
             onSubmitApplication={handleApplicationSubmitted}
+            onOpenResumeBuilder={() => {
+              setSelectedJobForApply(null);
+              setPortal('resume');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           />
 
           <PostJobModal
